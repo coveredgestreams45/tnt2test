@@ -134,6 +134,7 @@ body{
 
 <body>
 
+<!-- POPUP -->
 <div class="popup" id="popup">
   <div class="popup-box">
     <h2>Welcome 🤩</h2>
@@ -166,8 +167,8 @@ body{
   <div class="card">
     <div class="section-title">❤️ Share & Support</div>
     <div class="share-row">
-      <button class="btn primary">Share</button>
-      <button class="btn secondary">Copy Link</button>
+      <button class="btn primary" id="shareBtn">Share</button>
+      <button class="btn secondary" id="copyBtn">Copy Link</button>
     </div>
   </div>
 
@@ -216,6 +217,25 @@ async function initPlayer(){
 }
 
 document.addEventListener("DOMContentLoaded",initPlayer);
+
+/* SHARE */
+document.getElementById("shareBtn").addEventListener("click", async () => {
+  if (navigator.share) {
+    await navigator.share({
+      title: "CricxCrate – Live Cricket",
+      text: "Watch live cricket & get instant updates 🏏🔥",
+      url: window.location.href
+    });
+  } else {
+    alert("Sharing not supported. Use Copy Link.");
+  }
+});
+
+/* COPY LINK */
+document.getElementById("copyBtn").addEventListener("click", async () => {
+  await navigator.clipboard.writeText(window.location.href);
+  alert("✅ Link copied!");
+});
 </script>
 
 </body>
